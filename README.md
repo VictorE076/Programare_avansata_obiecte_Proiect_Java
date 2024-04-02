@@ -6,11 +6,13 @@ Platforma Food Delivery ( localuri, comenzi, șoferi, useri )
 
 Etapa 1:
 
-Definire Sistem
-Implementare
+-> Definire Sistem
+
+-> Implementare
 
 
 Etapa 2:
 
 -> Baza de date relationala si JDBC
+
 -> Serviciu de audit
