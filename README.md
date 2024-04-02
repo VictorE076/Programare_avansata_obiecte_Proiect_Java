@@ -6,8 +6,8 @@ Platforma Food Delivery ( localuri, comenzi, șoferi, useri )
 
 Etapa 1:
 
--> Definire Sistem
--> Implementare
+Definire Sistem
+Implementare
 
 
 Etapa 2:
