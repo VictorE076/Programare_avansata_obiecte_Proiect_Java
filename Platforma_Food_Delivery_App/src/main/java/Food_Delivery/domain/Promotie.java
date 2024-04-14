@@ -1,5 +1,7 @@
 package Food_Delivery.domain;
 
+import java.util.Objects;
+
 public class Promotie {
 
     private String descriere;
@@ -32,6 +34,18 @@ public class Promotie {
     ///
     ///
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Promotie promotie)) return false;
+        return Double.compare(this.reducere, promotie.reducere) == 0 && this.descriere.compareTo(promotie.descriere) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.descriere, this.reducere);
+    }
 
     @Override
     public String toString() {

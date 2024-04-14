@@ -1,5 +1,7 @@
 package Food_Delivery.domain;
 
+import java.util.Objects;
+
 public class Local {
 
     private String denumire;
@@ -14,12 +16,12 @@ public class Local {
     }
 
 
-    public String getNume() {
+    public String getDenumire() {
         return denumire;
     }
 
-    public void setNume(String nume) {
-        this.denumire = nume;
+    public void setDenumire(String denumire) {
+        this.denumire = denumire;
     }
 
     public String getAdresa() {
@@ -42,6 +44,18 @@ public class Local {
     ///
     ///
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Local local)) return false;
+        return this.denumire.compareTo(local.denumire) == 0 && this.adresa.compareTo(local.adresa) == 0 && this.meniu.equals(local.meniu);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.denumire, this.adresa, this.meniu);
+    }
 
     @Override
     public String toString() {

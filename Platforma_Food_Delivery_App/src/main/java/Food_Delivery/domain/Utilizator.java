@@ -1,5 +1,7 @@
 package Food_Delivery.domain;
 
+import java.util.Objects;
+
 public class Utilizator {
 
     protected static int Numar_Utilizatori = 0; // Total number of users (Simple or Premium)
@@ -39,6 +41,18 @@ public class Utilizator {
     }
     ///
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Utilizator user)) return false;
+        return this.datePers.equals(user.datePers) && this.adresa.compareTo(user.adresa) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.datePers, this.adresa);
+    }
 
     @Override
     public String toString() {

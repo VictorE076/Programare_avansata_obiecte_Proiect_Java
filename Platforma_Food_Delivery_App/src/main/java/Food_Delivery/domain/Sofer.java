@@ -1,5 +1,7 @@
 package Food_Delivery.domain;
 
+import java.util.Objects;
+
 public class Sofer {
 
     private DatePersonale datePers;
@@ -32,6 +34,18 @@ public class Sofer {
     ///
     ///
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Sofer sofer)) return false;
+        return this.datePers.equals(sofer.datePers) && this.vehicul.compareTo(sofer.vehicul) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.datePers, this.vehicul);
+    }
 
     @Override
     public String toString() {

@@ -11,7 +11,7 @@ public class Pizza extends Produs {
         super(denumire, pret);
 
         // Compozitie
-        this.ingrediente = new ArrayList<>(ingrediente.size()); // default type "String"
+        this.ingrediente = new ArrayList<>(ingrediente.size());
         Collections.copy(this.ingrediente, ingrediente);
     }
 
@@ -22,7 +22,7 @@ public class Pizza extends Produs {
 
     public void setIngrediente(List<String> ingrediente) {
         // Compozitie
-        this.ingrediente = new ArrayList<>(ingrediente.size()); // default type "String"
+        this.ingrediente = new ArrayList<>(ingrediente.size());
         Collections.copy(this.ingrediente, ingrediente);
     }
 
@@ -36,6 +36,19 @@ public class Pizza extends Produs {
     }
     ///
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Pizza pizza)) return false;
+        if (!super.equals(o)) return false;
+        return this.ingrediente.equals(pizza.ingrediente);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.ingrediente);
+    }
 
     @Override
     public String toString() {

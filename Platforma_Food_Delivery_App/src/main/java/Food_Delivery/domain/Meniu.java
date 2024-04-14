@@ -24,7 +24,7 @@ public class Meniu {
     ///
     private List<String> Produs_toString_Helper()
     {
-        List<String> produseStr = new ArrayList<>(this.produse.size()); // default type "String"
+        List<String> produseStr = new ArrayList<>(this.produse.size());
         for(Produs prod : this.produse)
         {
             produseStr.add(prod.toString());
@@ -34,6 +34,18 @@ public class Meniu {
     }
     ///
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Meniu meniu)) return false;
+        return this.produse.equals(meniu.produse);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.produse);
+    }
 
     @Override
     public String toString() {

@@ -1,5 +1,7 @@
 package Food_Delivery.domain;
 
+import java.util.Objects;
+
 public class UtilizatorPremium extends Utilizator {
 
     private static int Numar_UtilizatoriPremium = 0;
@@ -45,6 +47,19 @@ public class UtilizatorPremium extends Utilizator {
     }
     ///
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UtilizatorPremium premiumUser)) return false;
+        if (!super.equals(o)) return false;
+        return Double.compare(this.discount, premiumUser.discount) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), this.discount);
+    }
 
     @Override
     public String toString() {

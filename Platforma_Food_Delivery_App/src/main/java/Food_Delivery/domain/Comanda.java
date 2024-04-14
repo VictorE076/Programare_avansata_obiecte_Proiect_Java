@@ -1,5 +1,7 @@
 package Food_Delivery.domain;
 
+import java.util.Objects;
+
 public class Comanda {
 
     private Utilizator utilizator;
@@ -73,6 +75,18 @@ public class Comanda {
 
     ///
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Comanda comanda)) return false;
+        return Double.compare(this.suma, comanda.suma) == 0 && this.utilizator.equals(comanda.utilizator) && this.local.equals(comanda.local) && this.sofer.equals(comanda.sofer) && this.stadiuLivrare.compareTo(comanda.stadiuLivrare) == 0 && this.metodaPlata.compareTo(comanda.metodaPlata) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.utilizator, this.local, this.sofer, this.stadiuLivrare, this.suma, this.metodaPlata);
+    }
 
     @Override
     public String toString() {

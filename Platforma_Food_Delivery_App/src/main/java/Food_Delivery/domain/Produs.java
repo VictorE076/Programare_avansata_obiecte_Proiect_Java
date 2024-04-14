@@ -1,5 +1,7 @@
 package Food_Delivery.domain;
 
+import java.util.Objects;
+
 public abstract class Produs implements Comparable<Produs> {
 
     protected String denumire;
@@ -48,6 +50,18 @@ public abstract class Produs implements Comparable<Produs> {
         }
 
         return pretCompare;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Produs produs)) return false;
+        return Double.compare(this.pret, produs.pret) == 0 && this.denumire.compareTo(produs.denumire) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.denumire, this.pret);
     }
 
     @Override
