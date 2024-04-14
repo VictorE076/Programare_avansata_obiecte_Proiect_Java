@@ -67,6 +67,53 @@ SERVICES
 -> UtilizatorService (atribute: utilizatori - lista finala)
 
 
+ACTIUNI / INTEROGARI Posibile in clasele "Service":
 
+ComandaService
+
+-> plaseaza comanda
+
+-> sterge comanda
+
+-> actualizare stadiu comanda
+
+-> obtine detalii plata comanda
+
+-> Afisare comenzi
+
+
+LocalService
+
+-> adauga local
+
+-> sterge local
+
+-> actualizare meniu al unui local
+
+-> sorteaza produse meniu al unui local (dupa o regula impusa)
+
+-> sorteaza produse meniu pentru toate localurile (dupa aceeasi regula impusa)
+
+-> Afisare localuri
+
+
+PromotieService
+
+-> adauga promotie
+
+-> sterge promotie
+
+-> gaseste promotie
+
+-> Afiseaza toate promotiile
+
+
+UtilizatorService (useri normali sau preimum)
+
+-> adauga utilizator (daca CNP-ul acestuia este valid)
+
+-> sterge utilizator
+
+->Afiseaza utilizator
 
 
