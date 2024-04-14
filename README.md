@@ -114,6 +114,6 @@ UtilizatorService (useri normali sau preimum)
 
 -> sterge utilizator
 
-->Afiseaza utilizator
+-> Afiseaza toti utilizatorii
 
 
