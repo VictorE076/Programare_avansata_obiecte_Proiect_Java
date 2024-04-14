@@ -45,15 +45,13 @@ public class DatePersonale {
 
     /*
 
-    (?i)            -> makes it case-insensitive
     (^)             -> asserts that we are at the beginning of the String
-    (?=.*[a-z])     -> checks that we have at least 1 letter
-    [a-z0-9]{8,20}  -> matches 8 to 20 letters or digits (uppercase letters also accepted)
+    [0-9]{8,20}     -> matches 8 to 20 number of digits
     $               -> asserts that we've reached the end of the String
 
     */
     public boolean Valid_CNP() {
-        return this.cnp.matches("(?i)^(?=.*[a-z])[a-z0-9]{8,20}$");
+        return this.cnp.matches("^[0-9]{8,20}$");
     }
 
     ///

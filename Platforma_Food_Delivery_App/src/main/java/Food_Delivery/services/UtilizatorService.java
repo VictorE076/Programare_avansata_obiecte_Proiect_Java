@@ -1,6 +1,5 @@
 package Food_Delivery.services;
 
-import Food_Delivery.domain.Comanda;
 import Food_Delivery.domain.Utilizator;
 
 import java.util.*;
@@ -32,18 +31,20 @@ public class UtilizatorService { // Singleton
         // Regex
         boolean CNP_ok = utilizator.getDatePers().Valid_CNP();
 
-        if(CNP_ok) {
-            utilizatori.add(utilizator);
-            System.out.println("\n!!! Mesaj: User adaugat cu succes!\n");
-        }
-        else
+        if(!CNP_ok)
         {
             System.out.println("\n!!! Mesaj: Invalid CNP - User-ul nu are permisiunea de a fi adaugat!\n");
         }
+        else
+        {
+            this.utilizatori.add(utilizator);
+            System.out.println("\n!!! Mesaj: User adaugat cu succes!\n");
+
+        }
     }
 
-    public void stergeUtilizator(Utilizator utilizator) {
-        utilizatori.remove(utilizator);
+    public boolean stergeUtilizator(Utilizator utilizator) {
+        return this.utilizatori.remove(utilizator);
     }
 
     private List<String> Utilizator_toString_Helper()

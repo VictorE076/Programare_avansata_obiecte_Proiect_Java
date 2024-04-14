@@ -33,13 +33,17 @@ public class ComandaService { // Singleton
         this.comenzi.add(comanda);
     }
 
+    public boolean stergeComanda(Comanda comanda) {
+        return this.comenzi.remove(comanda);
+    }
+
     public int gasesteIndexComanda(Comanda comanda) {
         return this.comenzi.indexOf(comanda);
     }
 
-    public Comanda atribuieSoferComenzii(Comanda comanda, Sofer sofer) {
+    public Comanda atribuieNouSoferComenzii(Comanda comanda, Sofer sofer) {
         comanda.setSofer(sofer);
-        comanda.setStadiuLivrare("În curs de livrare");
+        comanda.setStadiuLivrare("In curs de livrare");
 
         return comanda;
     }
@@ -56,7 +60,7 @@ public class ComandaService { // Singleton
 
         if(indexOf != -1)
         {
-            return "Comanda " + indexOf + ", avand valoarea: " + comanda.getSuma() + ", Metoda Plata: " + comanda.getMetodaPlata();
+            return "Comanda " + (indexOf + 1) + ", avand valoarea: " + comanda.getSuma() + ", Metoda Plata: " + comanda.getMetodaPlata();
         }
 
         return detaliiPlata;

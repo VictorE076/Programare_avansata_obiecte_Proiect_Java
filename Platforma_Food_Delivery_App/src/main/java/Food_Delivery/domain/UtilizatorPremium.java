@@ -64,7 +64,7 @@ public class UtilizatorPremium extends Utilizator {
     @Override
     public String toString() {
         return "UtilizatorPremium{" +
-                "discount=" + discount +
+                "discount=" + (int)(100 * discount) + "% " +
                 ", datePers=" + datePers.toString() +
                 ", adresa='" + adresa + '\'' +
                 '}';

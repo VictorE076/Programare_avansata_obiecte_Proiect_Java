@@ -10,9 +10,7 @@ public class Pizza extends Produs {
     public Pizza(String denumire, double pret, List<String> ingrediente) {
         super(denumire, pret);
 
-        // Compozitie
-        this.ingrediente = new ArrayList<>(ingrediente.size());
-        Collections.copy(this.ingrediente, ingrediente);
+        this.ingrediente = ingrediente;
     }
 
 
@@ -21,9 +19,7 @@ public class Pizza extends Produs {
     }
 
     public void setIngrediente(List<String> ingrediente) {
-        // Compozitie
-        this.ingrediente = new ArrayList<>(ingrediente.size());
-        Collections.copy(this.ingrediente, ingrediente);
+        this.ingrediente = ingrediente;
     }
 
 
@@ -55,7 +51,7 @@ public class Pizza extends Produs {
         return "Pizza{" +
                 "ingrediente=" + String.join(", ", this.ingrediente) +
                 ", denumire='" + denumire + '\'' +
-                ", pret=" + pret +
+                ", pret=" + pret + "lei " +
                 '}';
     }
 }

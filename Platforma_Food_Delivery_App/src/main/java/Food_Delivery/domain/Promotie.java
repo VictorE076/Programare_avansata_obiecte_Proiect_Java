@@ -51,7 +51,7 @@ public class Promotie {
     public String toString() {
         return "Promotie{" +
                 "descriere='" + descriere + '\'' +
-                ", reducere=" + reducere +
+                ", reducere=" + (int)(100 * reducere) + "% " +
                 '}';
     }
 }

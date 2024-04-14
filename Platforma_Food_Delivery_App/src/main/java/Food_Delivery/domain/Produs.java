@@ -68,7 +68,7 @@ public abstract class Produs implements Comparable<Produs> {
     public String toString() {
         return "Produs{" +
                 "nume='" + denumire + '\'' +
-                ", pret=" + pret +
+                ", pret=" + pret + "lei " +
                 '}';
     }
 }

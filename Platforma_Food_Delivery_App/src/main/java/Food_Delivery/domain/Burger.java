@@ -58,7 +58,7 @@ public class Burger extends Produs {
         return "Burger{" +
                 "tipCarne='" + tipCarne + '\'' +
                 ", denumire='" + denumire + '\'' +
-                ", pret=" + pret +
+                ", pret=" + pret + "lei " +
                 '}';
     }
 }

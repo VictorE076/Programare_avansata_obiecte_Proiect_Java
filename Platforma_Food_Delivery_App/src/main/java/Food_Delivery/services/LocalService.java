@@ -27,8 +27,8 @@ public class LocalService { // Singleton
 
 
     ///
-    public boolean adaugaLocal(Local local) {
-        return this.localuri.add(local);
+    public void adaugaLocal(Local local) {
+        this.localuri.add(local);
     }
 
     public boolean stergeLocal(Local local) {
@@ -53,7 +53,7 @@ public class LocalService { // Singleton
     }
 
     //// !!! Sort "Produs" by "pret" Desc, then by "denumire" Asc
-    public Local SorteazaProduseMeniuLocal_PretDesc_Then_DenumireAsc(Local local) {
+    public Local SorteazaProduseMeniuLocal_PretDesc_Then_DenumireAsc(Local local) throws ClassCastException, UnsupportedOperationException, IllegalArgumentException {
         List<Produs> ProdMeniu = local.getMeniu().getProduse();
         Collections.sort(ProdMeniu);
         local.getMeniu().setProduse(ProdMeniu);
@@ -61,9 +61,9 @@ public class LocalService { // Singleton
         return local;
     }
 
-    //// !!! Sort "Produs" by "pret" Desc, then by "denumire" Asc
-    public void ALL_SorteazaProduseMeniuLocaluri_PretDesc_Then_DenumireAsc() {
-        ////// !! DE CONTINUAT AICI
+    //// !!! Sort ALL "Produs" by "pret" Desc, then by "denumire" Asc
+    public void ALLSorteazaProduseMeniuLocaluri_PretDesc_Then_DenumireAsc() throws NullPointerException, UnsupportedOperationException {
+        this.localuri.replaceAll(this::SorteazaProduseMeniuLocal_PretDesc_Then_DenumireAsc);
     }
 
     private List<String> Local_toString_Helper()
