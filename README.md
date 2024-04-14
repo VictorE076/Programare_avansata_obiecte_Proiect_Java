@@ -1,4 +1,4 @@
-!!! Parcurs - definirea celor 11 clase in pachetul "domain"
+!!! Parcurs - Etapa 1
 
 # Programare_avansata_obiecte_Proiect_Java
 Platforma Food Delivery ( localuri, comenzi, șoferi, useri )
@@ -18,3 +18,7 @@ Etapa 2:
 -> Baza de date relationala si JDBC
 
 -> Serviciu de audit
+
+1.DEFINIRE SISTEM:
+
+
