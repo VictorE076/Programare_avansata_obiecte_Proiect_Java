@@ -1,4 +1,4 @@
-!!! Parcurs - Etapa 1
+!!! PARCURS - Etapa 1
 
 # Programare_avansata_obiecte_Proiect_Java
 Platforma Food Delivery ( localuri, comenzi, șoferi, useri )
