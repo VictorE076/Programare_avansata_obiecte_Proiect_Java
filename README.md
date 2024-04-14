@@ -32,23 +32,41 @@ De asemenea, aplicatia permite interactiunea simpla si intuitiva intre 2 tipuri 
 Avem 11 tipuri de obiecte (clase definite in domain) + 4 tipuri de obiecte (clase "Service" asociate unor clase din domain, oferind totodata diferite functionalitati aplicatiei):
 
 DOMAIN
+
 -> DatePersonale (atribute: nume, prenume, cnp)
+
 -> Utilizator (atribute: datePersonale, adresa)
+
 -> UtilizatorPremium [extinsa din clasa "Utilizator"] (atribute noi: discount)
+
 -> Sofer (atribute: datePersonale, vehicul)
+
 -> Promotie (atribute: descriere, reducere)
+
 -> Produs (atribute: denumire, pret)
+
 -> Pizza [extinsa din clasa "Produs"] (atribute noi: ingrediente - lista)
+
 -> Burger [extinsa din clasa "Produs"] (atribute noi: tipCarne)
+
 -> Meniu (atribute: produse - lista)
+
 -> Local (atribute: denumire, adresa, meniu)
+
 -> Comanda (atribute: utilizator, local, sofer, stadiuLivrare, suma, metodaPlata)
 
+
 SERVICES
+
 -> ComandaService (atribute: comenzi - lista finala)
+
 -> LocalService (atribute: localuri - lista finala)
+
 -> PromotieService (atribute: promotii - set final)
+
 -> UtilizatorService (atribute: utilizatori - lista finala)
+
+
 
 
 
