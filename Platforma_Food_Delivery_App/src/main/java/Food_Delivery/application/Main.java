@@ -1,10 +1,10 @@
 package Food_Delivery.application;
 
 import Food_Delivery.domain.*;
-import Food_Delivery.services.ComandaService;
-import Food_Delivery.services.LocalService;
-import Food_Delivery.services.PromotieService;
-import Food_Delivery.services.UtilizatorService;
+import Food_Delivery.service.ComandaService;
+import Food_Delivery.service.LocalService;
+import Food_Delivery.service.PromotieService;
+import Food_Delivery.service.UtilizatorService;
 
 import java.util.*;
 
@@ -195,5 +195,21 @@ public class Main {
 
         ///
         System.out.println("\n//////////////////////////////////////////////////////\n");
+
+        ///
+
+        // After DEADLINE:
+        /*
+        Utilizator u4 = new Utilizator(new DatePersonale("Stancu", "Sebi", "111122223333"), "Strada Panselutelor Nr.100, Ploiesti");
+        Utilizator u5 = new UtilizatorPremium(u4, 0.78);
+        Utilizator u6 = new UtilizatorPremium(u5, 0.9);
+        Utilizator u7 = new UtilizatorPremium(u5, 0.6);
+
+        System.out.println(u4);
+        System.out.println(u5);
+        System.out.println(u6);
+        System.out.println(u7);
+        */
+
     }
 }

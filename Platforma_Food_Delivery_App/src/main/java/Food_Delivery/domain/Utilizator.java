@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Utilizator {
 
-    protected static int Numar_Utilizatori = 0; // Total number of users (Simple or Premium)
+    protected static int numarUtilizatori = 0; // Total number of users (Simple or Premium)
 
     protected DatePersonale datePers;
     protected String adresa;
@@ -14,7 +14,7 @@ public class Utilizator {
         this.datePers = datePers;
         this.adresa = adresa;
 
-        Numar_Utilizatori++;
+        numarUtilizatori++;
     }
 
 
@@ -37,7 +37,7 @@ public class Utilizator {
 
     ///
     public static int getNumar_Utilizatori() {
-        return Numar_Utilizatori;
+        return numarUtilizatori;
     }
     ///
 

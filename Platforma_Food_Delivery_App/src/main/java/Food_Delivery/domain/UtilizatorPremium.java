@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class UtilizatorPremium extends Utilizator {
 
-    private static int Numar_UtilizatoriPremium = 0;
+    private static int numarUtilizatoriPremium = 0;
 
     private double discount; // procent ( intervalul (0, 1) ) -- discount = 0 by default
 
@@ -13,7 +13,7 @@ public class UtilizatorPremium extends Utilizator {
         super(datePers, adresa);
         this.discount = discount;
 
-        Numar_UtilizatoriPremium++;
+        numarUtilizatoriPremium++;
     }
 
     public UtilizatorPremium(Utilizator utilizator, double discount) {
@@ -21,14 +21,16 @@ public class UtilizatorPremium extends Utilizator {
 
         if(utilizator instanceof UtilizatorPremium) // Check if parameter user is "Premium" or not
         {
+            // System.out.println("! Utilizator Premium !\n");
             this.discount = Double.max(((UtilizatorPremium) utilizator).discount, discount); // Downcast -- Maximum "discount" value assigned
         }
         else // Simple User
         {
+            // System.out.println("! Utilizator Simplu !\n");
             this.discount = discount;
         }
 
-        Numar_UtilizatoriPremium++;
+        numarUtilizatoriPremium++;
     }
 
 
@@ -43,7 +45,7 @@ public class UtilizatorPremium extends Utilizator {
 
     ///
     public static int getNumar_UtilizatoriPremium() {
-        return Numar_UtilizatoriPremium;
+        return numarUtilizatoriPremium;
     }
     ///
 
