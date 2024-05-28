@@ -1,0 +1,79 @@
+Promotie adaugata, 2024-05-28 22:57:32
+Promotie adaugata, 2024-05-28 22:57:32
+Promotie adaugata, 2024-05-28 22:57:32
+Promotie adaugata, 2024-05-28 22:57:32
+Promotie adaugata, 2024-05-28 22:57:32
+Afisarea tuturor promotiilor, 2024-05-28 22:57:32
+Promotie adaugata, 2024-05-28 22:57:32
+Gaseste promotia, 2024-05-28 22:57:32
+Promotie stearsa, 2024-05-28 22:57:32
+Utilizator adaugat, 2024-05-28 22:57:32
+Utilizator adaugat, 2024-05-28 22:57:32
+Utilizator adaugat, 2024-05-28 22:57:32
+Utilizator sters, 2024-05-28 22:57:32
+Local adaugat, 2024-05-28 22:57:32
+Local adaugat, 2024-05-28 22:57:32
+Produsele din meniul fiecarui local au fost sortate, 2024-05-28 22:57:32
+Meniu local actualizat, 2024-05-28 22:57:32
+Comanda plasata, 2024-05-28 22:57:32
+Informatii detalii plata comanda, 2024-05-28 22:57:32
+Promotie adaugata, 2024-05-28 23:29:05
+Promotie adaugata, 2024-05-28 23:29:05
+Promotie adaugata, 2024-05-28 23:29:05
+Promotie adaugata, 2024-05-28 23:29:05
+Promotie adaugata, 2024-05-28 23:29:05
+Afisarea tuturor promotiilor, 2024-05-28 23:29:05
+Promotie adaugata, 2024-05-28 23:29:05
+Gaseste promotia, 2024-05-28 23:29:05
+Promotie stearsa, 2024-05-28 23:29:05
+Utilizator adaugat, 2024-05-28 23:29:05
+Utilizator adaugat, 2024-05-28 23:29:05
+Utilizator adaugat, 2024-05-28 23:29:05
+Utilizator sters, 2024-05-28 23:29:05
+Local adaugat, 2024-05-28 23:29:05
+Local adaugat, 2024-05-28 23:29:05
+Produsele din meniul fiecarui local au fost sortate, 2024-05-28 23:29:05
+Meniu local actualizat, 2024-05-28 23:29:05
+Comanda plasata, 2024-05-28 23:29:05
+Informatii detalii plata comanda, 2024-05-28 23:29:05
+CREATE TABLE -> Sofer, 2024-05-28 23:29:06
+CREATE TABLE -> Utilizator, 2024-05-28 23:29:06
+CREATE TABLE -> Promotie, 2024-05-28 23:29:06
+CREATE TABLE -> Produs, 2024-05-28 23:29:06
+INSERT -> Promotie, 2024-05-28 23:29:06
+INSERT -> Promotie, 2024-05-28 23:29:06
+INSERT -> Promotie, 2024-05-28 23:29:06
+INSERT -> Promotie, 2024-05-28 23:29:06
+INSERT -> Promotie, 2024-05-28 23:29:06
+INSERT -> Produs, 2024-05-28 23:29:06
+INSERT -> Produs, 2024-05-28 23:29:06
+INSERT -> Produs, 2024-05-28 23:29:06
+INSERT -> Sofer, 2024-05-28 23:29:06
+INSERT -> Sofer, 2024-05-28 23:29:06
+INSERT -> Sofer, 2024-05-28 23:29:06
+INSERT -> Utilizator, 2024-05-28 23:29:06
+INSERT -> Utilizator, 2024-05-28 23:29:06
+READ (Info) -> Produs, 2024-05-28 23:29:06
+READ (Info) -> Promotie, 2024-05-28 23:29:07
+READ (Info) -> Sofer, 2024-05-28 23:29:07
+READ (Info) -> Utilizator, 2024-05-28 23:29:07
+READ (Info) -> Produs, 2024-05-28 23:29:07
+UPDATE -> Produs, 2024-05-28 23:29:07
+READ (Info) -> Produs, 2024-05-28 23:29:07
+READ (Info) -> Promotie, 2024-05-28 23:29:07
+UPDATE -> Promotie, 2024-05-28 23:29:07
+READ (Info) -> Promotie, 2024-05-28 23:29:07
+READ (Info) -> Sofer, 2024-05-28 23:29:07
+UPDATE -> Sofer, 2024-05-28 23:29:07
+READ (Info) -> Sofer, 2024-05-28 23:29:07
+READ (Info) -> Utilizator, 2024-05-28 23:29:07
+UPDATE -> Utilizator, 2024-05-28 23:29:07
+READ (Info) -> Utilizator, 2024-05-28 23:29:07
+READ (Info) -> Produs, 2024-05-28 23:29:07
+DELETE -> Produs, 2024-05-28 23:29:07
+READ (Info) -> Promotie, 2024-05-28 23:29:07
+DELETE -> Promotie, 2024-05-28 23:29:07
+READ (Info) -> Sofer, 2024-05-28 23:29:07
+DELETE -> Sofer, 2024-05-28 23:29:07
+READ (Info) -> Utilizator, 2024-05-28 23:29:07
+DELETE -> Utilizator, 2024-05-28 23:29:07

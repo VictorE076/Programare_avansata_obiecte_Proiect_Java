@@ -48,6 +48,9 @@ public class SoferDBService extends GenericDBService<Sofer> { // Singleton
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(createTableSQL);
+
+            // Audit
+            auditService.logOperation("CREATE TABLE", "Sofer");
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -59,6 +62,9 @@ public class SoferDBService extends GenericDBService<Sofer> { // Singleton
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(dropTableSQL);
+
+            // Audit
+            auditService.logOperation("DROP TABLE", "Sofer");
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -79,16 +85,26 @@ public class SoferDBService extends GenericDBService<Sofer> { // Singleton
         String vehicul = sofer.getVehicul();
 
         create(query, nume, prenume, cnp, vehicul);
+
+        // Audit
+        auditService.logOperation("INSERT", "Sofer");
     }
 
     // Read
     public List<Sofer> getAllSoferi() {
         String query = "SELECT * FROM Sofer";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Sofer");
+
         return readAll(query);
     }
 
     public Sofer getSofer_byID(int id) {
         String query = "SELECT * FROM Sofer WHERE id = ?";
+
+        auditService.logOperation("READ (Info)", "Sofer");
+
         return readOne(query, id);
     }
 
@@ -102,12 +118,18 @@ public class SoferDBService extends GenericDBService<Sofer> { // Singleton
         String vehicul = sofer.getVehicul();
 
         update(query, nume, prenume, cnp, vehicul, id);
+
+        // Audit
+        auditService.logOperation("UPDATE", "Sofer");
     }
 
     // Delete
     public void deleteSofer_byID(int id) {
         String query = "DELETE FROM Sofer WHERE id = ?";
         delete(query, id);
+
+        // Audit
+        auditService.logOperation("DELETE", "Sofer");
     }
 }
 

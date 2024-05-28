@@ -7,12 +7,14 @@ import Food_Delivery.service.LocalService;
 import Food_Delivery.service.PromotieService;
 import Food_Delivery.service.UtilizatorService;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+
+        /// Audit (Afisam sau nu intr-un fisier de tip CSV)
+        boolean infoAudit = true;
+        ///
 
         ////// PromotieService
         PromotieService promotieService = PromotieService.getInstanta();
@@ -20,29 +22,29 @@ public class Main {
         // 1. Adaugarea a 5 promotii disponibile in aplicatia de Food Delivery
         // (Promotiile vor fi sortate descrescator dupa valoarea reducerii, si in caz de egalitate, crescator lexicografic dupa descriere).
         // (Nu vor fi stocate in memorie promotiile egale din punct de vedere al continutului).
-        promotieService.adaugaPromotie(new Promotie("Reducere la pizza Margherita!", 0.2));
-        promotieService.adaugaPromotie(new Promotie("Reducere la pizza Diavola!", 0.15));
-        promotieService.adaugaPromotie(new Promotie("Reducere la pizza Napoletana!", 0.26));
-        promotieService.adaugaPromotie(new Promotie("Reducere la burger Black Angus!", 0.15));
-        promotieService.adaugaPromotie(new Promotie("Reducere la cheeseburger!", 0.18));
+        promotieService.adaugaPromotie(new Promotie("Reducere la pizza Margherita!", 0.2), infoAudit);
+        promotieService.adaugaPromotie(new Promotie("Reducere la pizza Diavola!", 0.15), infoAudit);
+        promotieService.adaugaPromotie(new Promotie("Reducere la pizza Napoletana!", 0.26), infoAudit);
+        promotieService.adaugaPromotie(new Promotie("Reducere la burger Black Angus!", 0.15), infoAudit);
+        promotieService.adaugaPromotie(new Promotie("Reducere la cheeseburger!", 0.18), infoAudit);
 
         // 2. Afisarea tuturor promotiilor disponibile.
-        promotieService.afiseazaSetPromotiiDisponibile();
+        promotieService.afiseazaSetPromotiiDisponibile(infoAudit);
 
         // 3. Gasirea unei promotii adaugate si stergerea acesteia din Service-ul respectiv
         // (Se va afisa un mesaj corespunzator pentru operatiile de gasire si stergere, care au fost efectuate cu succes)/
         Promotie promotie1 = new Promotie("Reducere la pizza Quattro Stagioni", 0.16);
 //        Promotie promotie2 = new Promotie("Reducere la pizza Quattro Stagioni", 0.15);
-        promotieService.adaugaPromotie(promotie1);
+        promotieService.adaugaPromotie(promotie1, infoAudit);
 //        promotieService.afiseazaSetPromotiiDisponibile();
 //        promotieService.adaugaPromotie(promotie2);
 //        promotieService.afiseazaSetPromotiiDisponibile();
-        boolean found_promotie1 = promotieService.gasestePromotia(promotie1);
+        boolean found_promotie1 = promotieService.gasestePromotia(promotie1, infoAudit);
 
         if(found_promotie1) {
             System.out.println("Am gasit <promotie1>!");
 
-            boolean delete_promotie1 = promotieService.stergePromotie(promotie1);
+            boolean delete_promotie1 = promotieService.stergePromotie(promotie1, infoAudit);
             if(delete_promotie1) {
                 System.out.println("<promotie1> sters cu succes!");
             }
@@ -63,23 +65,23 @@ public class Main {
         UtilizatorService userService = UtilizatorService.getInstanta();
 
         // 4. Adaugarea a 2 utilizatori normali si inca un utilizator premium (doar cei care au CNP-ul valid).
-        userService.adaugaUtilizator(new Utilizator(new DatePersonale("Pop", "Ion", "6040412019556"), "Strada Livezilor Nr.5, Bucuresti"));
+        userService.adaugaUtilizator(new Utilizator(new DatePersonale("Pop", "Ion", "6040412019556"), "Strada Livezilor Nr.5, Bucuresti"), infoAudit);
 //        System.out.println(userService);
 
         Utilizator u2 = new UtilizatorPremium(new DatePersonale("Lupsa", "Andrei", "0777134225262543535455343135476464645"), "Strada Lacramioarei Nr.10, Iasi", 0.4);
-        userService.adaugaUtilizator(u2); // Invalid CNP -> more than 20 number of digits
+        userService.adaugaUtilizator(u2, infoAudit); // Invalid CNP -> more than 20 number of digits
 //        System.out.println(userService);
 
         u2.getDatePers().setCnp("077713422526");
-        userService.adaugaUtilizator(u2);
+        userService.adaugaUtilizator(u2, infoAudit);
 //        System.out.println(userService);
 
         Utilizator u3 = new Utilizator(new DatePersonale("Mincu", "Robert", "a088989862123"), "Strada Sperantei Nr.1, Timisoara");
-        userService.adaugaUtilizator(u3); // Invalid CNP -> one letter included
+        userService.adaugaUtilizator(u3, infoAudit); // Invalid CNP -> one letter included
 //        System.out.println(userService);
 
         u3.getDatePers().setCnp("088989862123");
-        userService.adaugaUtilizator(u3);
+        userService.adaugaUtilizator(u3, infoAudit);
 //        System.out.println(userService);
 
         // 5. Afisarea tuturor utilizatorilor inregistrati pana in acest moment.
@@ -95,7 +97,7 @@ public class Main {
 
         // 7. Stergerea unui utilizator normal si reafisarea tuturor utilizatorilor inregistrati.
 
-        boolean simpleUserdeleted = userService.stergeUtilizator(u3);
+        boolean simpleUserdeleted = userService.stergeUtilizator(u3, infoAudit);
 
         if(simpleUserdeleted) {
             System.out.println("Utilizatorul a fost sters cu succes!");
@@ -149,12 +151,12 @@ public class Main {
         Local l1 = new Local("PizzaHut", "Strada Foamei Nr.2, Bucuresti", new Meniu(produse1));
         Local l2 = new Local("Trattoria Monza", "Strada Mancarii Nr.7, Brasov", new Meniu(produse2));
 
-        localService.adaugaLocal(l1);
-        localService.adaugaLocal(l2);
+        localService.adaugaLocal(l1, infoAudit);
+        localService.adaugaLocal(l2, infoAudit);
 
         // 9. Sortarea tututor produselor din fiecare meniu, descrescator dupa pret si in caz de egalitate, crescator dupa denumirea acestora + afisarea localurilor din aplicatie.
 
-        localService.ALLSorteazaProduseMeniuLocaluri_PretDesc_Then_DenumireAsc();
+        localService.ALLSorteazaProduseMeniuLocaluri_PretDesc_Then_DenumireAsc(infoAudit);
         System.out.println(localService);
 
         // 10. Calcularea tuturor taxelor produselor din meniul primului local prenzent in aplicatie.
@@ -168,7 +170,7 @@ public class Main {
 
         // 11. Afisarea tuturor localurilor + vom inlocui lista produselor din meniul celui de-al 2-lea local cu un nou meniu + afisarea tuturor localurilor dupa modificare.
         System.out.println(localService);
-        localService.UpdateMeniu_for(localService.getLocaluriDisponibile().get(1), new Meniu(produse3));
+        localService.UpdateMeniu_for(localService.getLocaluriDisponibile().get(1), new Meniu(produse3), infoAudit);
         System.out.println(localService);
 
         ///
@@ -180,7 +182,7 @@ public class Main {
         // 12. Crearea unei singure comenzi (utilizatorul premium adaugat anterior va da o comanda primului local disponibil in baza de date) + adaugarea acesteia in baza de date a aplicatiei + afisarea acelei comenzi plasate.
         Comanda comanda1 = new Comanda(u2, localService.getLocaluriDisponibile().getFirst(), new Sofer(new DatePersonale("Dobrescu", "Radu", "123456789"), "Motocicleta"), "Nelivrat", 120.3, "Card bancar");
 
-        comandaService.plaseazaComanda(comanda1);
+        comandaService.plaseazaComanda(comanda1, infoAudit);
 
         System.out.println(comandaService);
         System.out.println("\n");
@@ -193,7 +195,7 @@ public class Main {
         System.out.println("\n");
 
         // 14. Afisarea detaliilor de plata ale comenzii plasate, prezenta in baza de date.
-        String infoPlataComanda1 = comandaService.getDetaliiPlataComanda(comandaService.getComenziDisponibile().getFirst());
+        String infoPlataComanda1 = comandaService.getDetaliiPlataComanda(comandaService.getComenziDisponibile().getFirst(), infoAudit);
         System.out.println(infoPlataComanda1);
 
         ///
@@ -212,6 +214,7 @@ public class Main {
         ////// ETAPA 2:
 
         //// 1. Crearea tabelelor: Sofer, Utilizator, Promotie, Produs
+
 
 
         /// Sofer
@@ -245,12 +248,10 @@ public class Main {
         // DROP TABLE
         // produsDBService.dropTable();
 
-
         /// 2. Inseram informatii in tabelele create:
 
         System.out.println("-> CREATE Operation:\n");
 
-        /*
         /// Promotie
         for(Promotie promotie : promotieService.getPromotiiDisponibile()) {
             System.out.println(promotie);
@@ -281,8 +282,6 @@ public class Main {
             utilizatorDBService.addUtilizator(user);
         }
         System.out.println("\n");
-
-        */
 
 
         /// 3. Afisam/Preluam informatii din tabele:
@@ -371,6 +370,7 @@ public class Main {
 
         System.out.println("-> DELETE Operation:\n\n");
 
+
         /// Produs: Stergem produsul, avand id = 3:
 
         System.out.println("Produsul cu id-ul = " + 3 + " inainte sa fie sters:");
@@ -399,5 +399,6 @@ public class Main {
         utilizatorDBService.deleteUtilizator_byID(2);
 
         System.out.println("\n///////////////////////////////////////\n");
+
     }
 }

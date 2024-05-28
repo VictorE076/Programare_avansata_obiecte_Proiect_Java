@@ -55,6 +55,9 @@ public class ProdusDBService extends GenericDBService<Produs> { // Singleton
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(createTableSQL);
+
+            // Audit
+            auditService.logOperation("CREATE TABLE", "Produs");
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -66,6 +69,9 @@ public class ProdusDBService extends GenericDBService<Produs> { // Singleton
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(dropTableSQL);
+
+            // Audit
+            auditService.logOperation("DROP TABLE", "Produs");
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -92,21 +98,36 @@ public class ProdusDBService extends GenericDBService<Produs> { // Singleton
         }
 
         create(query, denumire, pret, tipCarne, ingrediente);
+
+        // Audit
+        auditService.logOperation("INSERT", "Produs");
     }
 
     // Read
     public List<Produs> getAllProdus() {
         String query = "SELECT * FROM Produs";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Produs");
+
         return readAll(query);
     }
 
     public List<Produs> getAllProdus_LowerPrice() {
         String query = "SELECT * FROM Produs ORDER BY pret ASC";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Produs");
+
         return readAll(query);
     }
 
     public Produs getProdus_byID(int id) {
         String query = "SELECT * FROM Produs WHERE id = ?";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Produs");
+
         return readOne(query, id);
     }
 
@@ -126,12 +147,18 @@ public class ProdusDBService extends GenericDBService<Produs> { // Singleton
         }
 
         update(query, denumire, pret, tipCarne, ingrediente, id);
+
+        // Audit
+        auditService.logOperation("UPDATE", "Produs");
     }
 
     // Delete
     public void deleteProdus_byID(int id) {
         String query = "DELETE FROM Produs WHERE id = ?";
         delete(query, id);
+
+        // Audit
+        auditService.logOperation("DELETE", "Produs");
     }
 }
 

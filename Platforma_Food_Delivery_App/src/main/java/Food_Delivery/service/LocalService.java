@@ -1,5 +1,6 @@
 package Food_Delivery.service;
 
+import Food_Delivery.audit.AuditService;
 import Food_Delivery.domain.Local;
 import Food_Delivery.domain.Meniu;
 import Food_Delivery.domain.Produs;
@@ -11,9 +12,14 @@ public class LocalService { // Singleton
     private static LocalService instanta = null;
     private final List<Local> localuri;
 
+    // Audit
+    private AuditService auditService;
 
     private LocalService() {
         this.localuri = new ArrayList<>();
+
+        // Audit
+        auditService = AuditService.getInstance();
     }
 
 
@@ -27,11 +33,19 @@ public class LocalService { // Singleton
 
 
     ///
-    public void adaugaLocal(Local local) {
+    public void adaugaLocal(Local local, boolean infoAudit) {
         this.localuri.add(local);
+
+        if(infoAudit) {
+            auditService.logAction("Local adaugat");
+        }
     }
 
-    public boolean stergeLocal(Local local) {
+    public boolean stergeLocal(Local local, boolean infoAudit) {
+        if(infoAudit) {
+            auditService.logAction("Local sters");
+        }
+
         return this.localuri.remove(local);
     }
 
@@ -43,11 +57,15 @@ public class LocalService { // Singleton
         return this.localuri.indexOf(local);
     }
 
-    public void UpdateMeniu_for(Local local, Meniu meniu) {
+    public void UpdateMeniu_for(Local local, Meniu meniu, boolean infoAudit) {
         int indexOf = gasesteIndexLocal(local);
 
         if(indexOf != -1)
         {
+            if(infoAudit) {
+                auditService.logAction("Meniu local actualizat");
+            }
+
             this.localuri.set(indexOf, new Local(local.getDenumire(), local.getAdresa(), meniu));
         }
     }
@@ -62,8 +80,12 @@ public class LocalService { // Singleton
     }
 
     //// !!! Sort ALL "Produs" by "pret" Desc, then by "denumire" Asc
-    public void ALLSorteazaProduseMeniuLocaluri_PretDesc_Then_DenumireAsc() throws NullPointerException, UnsupportedOperationException {
+    public void ALLSorteazaProduseMeniuLocaluri_PretDesc_Then_DenumireAsc(boolean infoAudit) throws NullPointerException, UnsupportedOperationException {
         this.localuri.replaceAll(this::SorteazaProduseMeniuLocal_PretDesc_Then_DenumireAsc);
+
+        if(infoAudit) {
+            auditService.logAction("Produsele din meniul fiecarui local au fost sortate");
+        }
     }
 
     private List<String> Local_toString_Helper()

@@ -1,5 +1,6 @@
 package Food_Delivery.service;
 
+import Food_Delivery.audit.AuditService;
 import Food_Delivery.domain.Comanda;
 import Food_Delivery.domain.Sofer;
 
@@ -10,9 +11,14 @@ public class ComandaService { // Singleton
     private static ComandaService instanta = null;
     private final List<Comanda> comenzi;
 
+    // Audit
+    private AuditService auditService;
 
     private ComandaService() {
         this.comenzi = new ArrayList<>();
+
+        // Audit
+        this.auditService = AuditService.getInstance();
     }
 
     public static ComandaService getInstanta() {
@@ -29,11 +35,19 @@ public class ComandaService { // Singleton
         return this.comenzi;
     }
 
-    public void plaseazaComanda(Comanda comanda) {
+    public void plaseazaComanda(Comanda comanda, boolean infoAudit) {
+        if(infoAudit) {
+            auditService.logAction("Comanda plasata");
+        }
+
         this.comenzi.add(comanda);
     }
 
-    public boolean stergeComanda(Comanda comanda) {
+    public boolean stergeComanda(Comanda comanda, boolean infoAudit) {
+        if(infoAudit) {
+            auditService.logAction("Comanda stearsa");
+        }
+
         return this.comenzi.remove(comanda);
     }
 
@@ -48,18 +62,26 @@ public class ComandaService { // Singleton
         return comanda;
     }
 
-    public Comanda actualizareStadiuComanda(Comanda comanda, String nouStadiuLivrare) {
+    public Comanda actualizareStadiuComanda(Comanda comanda, String nouStadiuLivrare, boolean infoAudit) {
         comanda.setStadiuLivrare(nouStadiuLivrare);
+
+        if(infoAudit) {
+            auditService.logAction("Comanda actualizata");
+        }
 
         return comanda;
     }
 
-    public String getDetaliiPlataComanda(Comanda comanda) {
+    public String getDetaliiPlataComanda(Comanda comanda, boolean infoAudit) {
         String detaliiPlata = null;
         int indexOf = gasesteIndexComanda(comanda);
 
         if(indexOf != -1)
         {
+            if(infoAudit) {
+                auditService.logAction("Informatii detalii plata comanda");
+            }
+
             return "Comanda " + (indexOf + 1) + ", avand valoarea: " + comanda.getSuma() + ", Metoda Plata: " + comanda.getMetodaPlata();
         }
 

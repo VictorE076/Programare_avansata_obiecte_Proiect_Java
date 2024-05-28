@@ -56,6 +56,9 @@ public class UtilizatorDBService extends GenericDBService<Utilizator> { // Singl
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(createTableSQL);
+
+            // Audit
+            auditService.logOperation("CREATE TABLE", "Utilizator");
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -67,6 +70,9 @@ public class UtilizatorDBService extends GenericDBService<Utilizator> { // Singl
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(dropTableSQL);
+
+            // Audit
+            auditService.logOperation("DROP TABLE", "Utilizator");
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -91,16 +97,27 @@ public class UtilizatorDBService extends GenericDBService<Utilizator> { // Singl
         }
 
         create(query, nume, prenume, cnp, adresa, discount);
+
+        // Audit
+        auditService.logOperation("INSERT", "Utilizator");
     }
 
     // Read
     public List<Utilizator> getAllUtilizatori() {
         String query = "SELECT * FROM Utilizator";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Utilizator");
+
         return readAll(query);
     }
 
     public Utilizator getUtilizator_byID(int id) {
         String query = "SELECT * FROM Utilizator WHERE id = ?";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Utilizator");
+
         return readOne(query, id);
     }
 
@@ -118,11 +135,17 @@ public class UtilizatorDBService extends GenericDBService<Utilizator> { // Singl
         }
 
         update(query, nume, prenume, cnp, adresa, discount, id);
+
+        // Audit
+        auditService.logOperation("UPDATE", "Utilizator");
     }
 
     // Delete
     public void deleteUtilizator_byID(int id) {
         String query = "DELETE FROM Utilizator WHERE id = ?";
         delete(query, id);
+
+        // Audit
+        auditService.logOperation("DELETE", "Utilizator");
     }
 }

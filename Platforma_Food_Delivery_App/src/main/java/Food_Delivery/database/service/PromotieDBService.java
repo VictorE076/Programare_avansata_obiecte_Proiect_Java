@@ -43,6 +43,9 @@ public class PromotieDBService extends GenericDBService<Promotie> { // Singleton
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(createTableSQL);
+
+            // Audit
+            auditService.logOperation("CREATE TABLE", "Promotie");
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -54,6 +57,9 @@ public class PromotieDBService extends GenericDBService<Promotie> { // Singleton
 
         try (Statement stmt = connection.createStatement()) {
             stmt.execute(dropTableSQL);
+
+            // Audit
+            auditService.logOperation("DROP TABLE", "Promotie");
         } catch(SQLException e) {
             e.printStackTrace();
         }
@@ -72,21 +78,36 @@ public class PromotieDBService extends GenericDBService<Promotie> { // Singleton
         double reducere = promotie.getReducere();
 
         create(query, descriere, reducere);
+
+        // Audit
+        auditService.logOperation("INSERT", "Promotie");
     }
 
     // Read
     public List<Promotie> getAllPromotii() {
         String query = "SELECT * FROM Promotie";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Promotie");
+
         return readAll(query);
     }
 
     public List<Promotie> getAllPromotii_GreaterDiscount() {
         String query = "SELECT * FROM Promotie ORDER BY reducere DESC";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Promotie");
+
         return readAll(query);
     }
 
     public Promotie getPromotie_byID(int id) {
         String query = "SELECT * FROM Promotie WHERE id = ?";
+
+        // Audit
+        auditService.logOperation("READ (Info)", "Promotie");
+
         return readOne(query, id);
     }
 
@@ -98,12 +119,18 @@ public class PromotieDBService extends GenericDBService<Promotie> { // Singleton
         double reducere = promotie.getReducere();
 
         update(query, descriere, reducere, id);
+
+        // Audit
+        auditService.logOperation("UPDATE", "Promotie");
     }
 
     // Delete
     public void deletePromotie_byID(int id) {
         String query = "DELETE FROM Promotie WHERE id = ?";
         delete(query, id);
+
+        // Audit
+        auditService.logOperation("DELETE", "Promotie");
     }
 }
 

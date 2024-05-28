@@ -1,5 +1,6 @@
 package Food_Delivery.database.service;
 
+import Food_Delivery.audit.AuditService;
 import Food_Delivery.database.config.DatabaseConfiguration;
 
 import java.sql.*;
@@ -8,8 +9,14 @@ import java.util.*;
 public abstract class GenericDBService<T> {
     protected Connection connection;
 
+    // Audit
+    protected AuditService auditService;
+
     public GenericDBService() {
         this.connection = DatabaseConfiguration.getDatabaseConnection();
+
+        // Audit
+        this.auditService = AuditService.getInstance();
     }
 
 
