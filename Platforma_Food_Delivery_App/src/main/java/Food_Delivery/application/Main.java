@@ -1,11 +1,14 @@
 package Food_Delivery.application;
 
+import Food_Delivery.database.service.*;
 import Food_Delivery.domain.*;
 import Food_Delivery.service.ComandaService;
 import Food_Delivery.service.LocalService;
 import Food_Delivery.service.PromotieService;
 import Food_Delivery.service.UtilizatorService;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class Main {
@@ -197,19 +200,204 @@ public class Main {
         System.out.println("\n//////////////////////////////////////////////////////\n");
 
         ///
+        Sofer sofer1 = new Sofer(new DatePersonale("Nedelcu", "Andrei", "764568026"), "Motocicleta");
 
-        // After DEADLINE:
+        List<Sofer> soferi1 = new ArrayList<>();
+        soferi1.add(new Sofer(new DatePersonale("Popa", "Dan", "333245256"), "Masina"));
+        soferi1.add(new Sofer(new DatePersonale("Ionescu", "Marcel", "09876543"), "Trotineta electrica"));
+        soferi1.add(sofer1);
+
+        ///
+
+        ////// ETAPA 2:
+
+        //// 1. Crearea tabelelor: Sofer, Utilizator, Promotie, Produs
+
+
+        /// Sofer
+        SoferDBService soferDBService = SoferDBService.getInstance();
+        soferDBService.createTable();
+
+        // DROP TABLE
+        // soferDBService.dropTable();
+
+
+        /// Utilizator
+        UtilizatorDBService utilizatorDBService = UtilizatorDBService.getInstance();
+        utilizatorDBService.createTable();
+
+        // DROP TABLE
+        // utilizatorDBService.dropTable();
+
+
+        /// Promotie
+        PromotieDBService promotieDBService = PromotieDBService.getInstance();
+        promotieDBService.createTable();
+
+        // DROP TABLE
+        // promotieDBService.dropTable();
+
+
+        /// Produs
+        ProdusDBService produsDBService = ProdusDBService.getInstance();
+        produsDBService.createTable();
+
+        // DROP TABLE
+        // produsDBService.dropTable();
+
+
+        /// 2. Inseram informatii in tabelele create:
+
+        System.out.println("-> CREATE Operation:\n");
+
         /*
-        Utilizator u4 = new Utilizator(new DatePersonale("Stancu", "Sebi", "111122223333"), "Strada Panselutelor Nr.100, Ploiesti");
-        Utilizator u5 = new UtilizatorPremium(u4, 0.78);
-        Utilizator u6 = new UtilizatorPremium(u5, 0.9);
-        Utilizator u7 = new UtilizatorPremium(u5, 0.6);
+        /// Promotie
+        for(Promotie promotie : promotieService.getPromotiiDisponibile()) {
+            System.out.println(promotie);
+            promotieDBService.addPromotie(promotie);
+        }
+        System.out.println("\n");
 
-        System.out.println(u4);
-        System.out.println(u5);
-        System.out.println(u6);
-        System.out.println(u7);
+
+        /// Produs
+        for(Produs produs : produse1) {
+            System.out.println(produs);
+            produsDBService.addProdus(produs);
+        }
+        System.out.println("\n");
+
+
+        /// Sofer
+        for(Sofer sofer : soferi1) {
+            System.out.println(sofer);
+            soferDBService.addSofer(sofer);
+        }
+        System.out.println("\n");
+
+
+        /// Utilizator
+        for(Utilizator user : userService.getUtilizatoriDisponibili()) {
+            System.out.println(user);
+            utilizatorDBService.addUtilizator(user);
+        }
+        System.out.println("\n");
+
         */
 
+
+        /// 3. Afisam/Preluam informatii din tabele:
+
+        System.out.println("-> READ Operation:\n\n");
+
+        /// Produs: Afisam toate produsele in ordine crescatoare dupa pretul acestora.
+        System.out.println("Informatii Produs:");
+        List<Produs> produseBD = produsDBService.getAllProdus_LowerPrice();
+        for(Produs produs : produseBD) {
+            System.out.println(produs);
+        }
+        System.out.println("\n");
+
+
+        /// Promotie: Afisam toate promotiile in ordine descrescatoare dupa valoarea discount-ului.
+        System.out.println("Informatii Promotie:");
+        List<Promotie> promotiiBD = promotieDBService.getAllPromotii_GreaterDiscount();
+        for(Promotie promotie : promotiiBD) {
+            System.out.println(promotie);
+        }
+        System.out.println("\n");
+
+
+        /// Sofer: Afisam toti soferii inregistrati.
+        System.out.println("Informatii Soferi:");
+        List<Sofer> soferiBD = soferDBService.getAllSoferi();
+        for(Sofer sofer : soferiBD) {
+            System.out.println(sofer);
+        }
+        System.out.println("\n");
+
+
+        /// Utilizator: Afisam utilizatorul (simplu sau premium) cu id = 2;
+        System.out.println("Informatii Utilizatori:");
+        int searched_byID = 2;
+        Utilizator userBD = utilizatorDBService.getUtilizator_byID(searched_byID);
+        System.out.println(userBD + "\n");
+
+
+        /// 4. Modificam linii din tabele:
+
+        System.out.println("-> UPDATE Operation:\n\n");
+
+        /// Produs: Inlocuim produsul, avand id = 1 cu noul produs dat ca parametru.
+
+        System.out.println("Produsul cu id-ul = " + 1 + " inainte de modificare:");
+        System.out.println(produsDBService.getProdus_byID(1));
+
+        System.out.println("Produsul cu id-ul = " + 1 + " dupa modificare:");
+        produsDBService.updateProdus_byID(produse2.getFirst(), 1);
+        System.out.println(produsDBService.getProdus_byID(1) + "\n");
+
+
+        /// Promotie: Inlocuim promotia, avand id = 3 cu noua promotie.
+
+        System.out.println("Promotia cu id-ul = " + 3 + " inainte de modificare:");
+        System.out.println(promotieDBService.getPromotie_byID(3));
+
+        System.out.println("Promotia cu id-ul = " + 3 + " dupa modificare:");
+        promotieDBService.updatePromotie_byID(new Promotie("Reducere la Pepperoni Pizza!", 0.12), 3);
+        System.out.println(promotieDBService.getPromotie_byID(3) + "\n");
+
+
+        /// Sofer: Inlocuim soferul, avand id = 2 cu noul sofer.
+
+        System.out.println("Soferul cu id-ul = " + 2 + " inainte de modificare:");
+        System.out.println(soferDBService.getSofer_byID(2));
+
+        System.out.println("Soferul cu id-ul = " + 2 + " dupa modificare:");
+        soferDBService.updateSofer_byID(new Sofer(new DatePersonale("Mironescu", "Miruna", "000111222333"), "Masina"), 2);
+        System.out.println(soferDBService.getSofer_byID(2) + "\n");
+
+
+        /// Utilizator: Inlocuim utilizatorul (simplu sau premium), avand id = 1 cu noul utilizator (simplu sau premium).
+
+        System.out.println("Utilizatorul cu id-ul = " + 1 + " inainte de modificare:");
+        System.out.println(utilizatorDBService.getUtilizator_byID(1));
+
+        System.out.println("Utilizatorul cu id-ul = " + 1 + " dupa modificare:");
+        utilizatorDBService.updateUtilizator_byID(new UtilizatorPremium(new DatePersonale("Voicu", "Matei", "426745237"), "Strada Crinilor Nr.1", 0.01), 1);
+        System.out.println(utilizatorDBService.getUtilizator_byID(1) + "\n");
+
+
+        /// 5. Stergem linii din tabele:
+
+        System.out.println("-> DELETE Operation:\n\n");
+
+        /// Produs: Stergem produsul, avand id = 3:
+
+        System.out.println("Produsul cu id-ul = " + 3 + " inainte sa fie sters:");
+        System.out.println(produsDBService.getProdus_byID(3));
+        produsDBService.deleteProdus_byID(3);
+
+
+        /// Promotie: Stergem promotia, avand id = 3:
+
+        System.out.println("Promotia cu id-ul = " + 3 + " inainte sa fie stearsa:");
+        System.out.println(promotieDBService.getPromotie_byID(3));
+        promotieDBService.deletePromotie_byID(3);
+
+
+        /// Sofer: Stergem soferul, avand id = 1:
+
+        System.out.println("Soferul cu id-ul = " + 1 + " inainte sa fie sters:");
+        System.out.println(soferDBService.getSofer_byID(1));
+        soferDBService.deleteSofer_byID(1);
+
+
+        /// Utilizator: Stergem utilizatorul (simplu sau premium), avand id = 2:
+
+        System.out.println("Utilizatorul cu id-ul = " + 2 + " inainte sa fie sters:");
+        System.out.println(utilizatorDBService.getUtilizator_byID(2));
+        utilizatorDBService.deleteUtilizator_byID(2);
+
+        System.out.println("\n///////////////////////////////////////\n");
     }
 }
